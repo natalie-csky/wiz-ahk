@@ -23,7 +23,7 @@ All hotkeys are easily customizable via the ***config.ahk*** file.
 - **q** &ensp; - &ensp; **PressQEveryWindow**
   - Presses 'q' (opens quest book) on every window.
 - **e** &ensp; - &ensp; **PressPEveryWindow**
-  - Presses 'p' on every character. I just wanted to press 'e' instead of 'p' to open my decks. Personal preference.
+  - Presses 'p' (opens spells/decks) on every character. I just wanted to press 'e' instead of 'p' to open my decks. Personal preference.
 - **space** &ensp; - &ensp; **PressSpaceEveryWindow**
   - Presses 'space' on every character. Useful after pressing 'x', to continue dialogue with NPC on all characters.
 - **MButton** &ensp; - &ensp; **LClickEveryWindow**
