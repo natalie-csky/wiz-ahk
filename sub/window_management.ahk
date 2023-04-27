@@ -1,15 +1,5 @@
 #Include window_helper.ahk
 
-; !!! ================== !!!
-; TODO: Refactor wiz.py more generic, variable
-; Execute wiz.py script (start wiz client) if there is no client open
-; If WindowList.Length == 0
-; {
-; 	RunWait '"C:\Users\Thomas\AppData\Local\Programs\Python\Python310\python.exe" "C:\Users\Thomas\Desktop\AM VIII\Wiz101 Autohotkey\wiz.py"'
-; 	WindowList := WinGetList("ahk_exe WizardGraphicalClient.exe")
-; }
-; !!! ================== !!!
-
 ; Manual window assignment per user's choice, by assigning the active window
 AssignWindows(ThisHotkey)
 {
