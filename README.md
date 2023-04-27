@@ -1,8 +1,28 @@
 # Wizard101 Multi-boxing Tools + More
+
 This AutoHotKey script mainly helps you with multi-boxing in Wizard101 but also provides some other tools.  
 All hotkeys are easily customizable via the ***config.ahk*** file.
- 
-## Hotkeys: (Default Hotkey, Function)
+
+## Quickstart Guide:
+
+- Launch all windows/characters you want to play with
+- Start main.ahk script
+- You now want to sort your characters:
+  - Focus on the window of your first character
+  - Press F12 (default)
+  - A message box should open up, telling you that 1/x characters have been assigned. x is the amount of windows you have open in total.
+  - Do the same with your next character and with all the other ones as well until the message box says that all characters have been assigned.
+- If you now press '1' (on your number row), the focus should switch to your first character. Pressing '2' to your second and so on. This is useful in battle when your characters go into battle the way they are ordered in the window list.
+
+- Now let's setup the teleport. 
+  - Put all your characters into the same group. 
+  - Switch to the first character in your group (they are always alphabetically sorted). Press F11. Switch to the next character. Press F11. And so on until the message box tells you that all characters have been assigned.
+  - Now make sure all your characters have the group tab active, not the friends tab or any other tab. Close that tab on every character. Now switch to the character you want everyone else teleport to. 
+  - Now press Tab. If everything went well, you should have a bunch of characters standing inside of you now. If something went wrong, common mistakes (i.e. mistakes that I often do) are not having the groups tab active or having it open. The groups tab needs to be active, but closed. (Might tweak this feature a little in the future)
+  
+- If you don't want to tediously setup afk spinning on every character, just press F3 and all your characters will jump every now and then. Pressing F3 turns this timer off again.
+
+## Hotkeys: (Default Hotkey - Function)
 
 ### Script
 
@@ -57,3 +77,9 @@ All hotkeys are easily customizable via the ***config.ahk*** file.
 ### Autonomous Dancers
 - **F4** &ensp; - &ensp; **AutoPetDanceGame**
   - Makes pets dance without requiring your input. Go to the Dance Game, select a world, then press this hotkey. Make pets work for themselves.
+
+## Configurations:
+- This script is made for a 1920 * 1080p resolution and the small UI size option (inside the game settings)
+  - Inside the config.ahk file is code to make the script work for regular UI size.
+    - Remove all the semicolons from the configurations block at the end of the file (except the title) and add semicolons to the block with the small UI size options.
+- If you want to make this script work for other resolutions or other sizes, kindly ask me to add them or add them yourself. AutoHotkey provides a 'Window Spy' with that you can see the x and y coordinates of your mouse cursor. With help of the Window Spy you can edit the config.ahk file to fit your resolution.
