@@ -1,1 +1,59 @@
-# wiz-ahk
+# Wizard101 Multi-boxing Tools + More
+This AutoHotKey script mainly helps you with multi-boxing in Wizard101 but also provides some other tools.  
+All hotkeys are easily customizable via the ***config.ahk*** file.
+ 
+## Hotkeys: (Default Hotkey, Function)
+
+### Script
+
+- **F1** &ensp; - &ensp; **CloseScriptMain**
+  - Exits the main script
+- **F2** &ensp; - &ensp; **ToggleSuspension**
+  - Toggles suspension state of all hotkeys, except for the CloseScriptMain hotkey. Suspended hotkeys cannot be triggered and can be used as normal again.
+
+### Anti Idle Disconnect
+
+- **F3** &ensp; - &ensp; **ToggleAntiIdleDisconnect**
+  - Toggles a timer that makes all characters jump every 8 minutes (by default)
+
+### Multi-press / -click
+
+- **x** &ensp; - &ensp; **PressXEveryWindow**
+  - Presses 'x' on every window. Useful in combination with **Teleport** to make all characters talk to the same npc simultaneously.
+- **q** &ensp; - &ensp; **PressQEveryWindow**
+  - Presses 'q' (opens quest book) on every window.
+- **e** &ensp; - &ensp; **PressPEveryWindow**
+  - Presses 'p' on every character. I just wanted to press 'e' instead of 'p' to open my decks. Personal preference.
+- **space** &ensp; - &ensp; **PressSpaceEveryWindow**
+  - Presses 'space' on every character. Useful after pressing 'x', to continue dialogue with NPC on all characters.
+- **MButton** &ensp; - &ensp; **LClickEveryWindow**
+  - Clicks the left mouse button at the current cursor position on all windows. Useful if you need to go through the same menu on multiple characters. MButton means Middle Mouse Button.
+
+### Realms
+
+- **F5** &ensp; - &ensp; **SwitchRealms**
+  - Makes all characters switch to different realms. Useful for reagent farming. Consecutive realm switches makes the characters go further down the realm list (with Wu being the first and Ambrose being the last realm).
+- **F9** &ensp; - &ensp; **ResetRealms**
+  - Resets the SwitchRealms Hotkey to start at the first realm again.
+
+### Multi-Teleport
+
+- **F11** &ensp; - &ensp; **SetupTeleport**
+  - Required for the next hotkey, Teleport. First, make all your characters join the same group. Your group is automatically alphabetically sorted. Now press this hotkey (default=F11) on the first character of your group. Then do it again on your second character, then on your third, then on your fourth (or less characters). A message box should tell you how many characters have been assigned. Also, make sure the "group" tab is the selected tab in your friends list, on all characters. Now close the tab on all characters and you should be good to go.
+- **Tab** &ensp; - &ensp; **Teleport**
+  - A lifesaver. The most useful hotkey imo. If you have setup this hotkey correctly (see SetupTeleport above), pressing Tab teleports all *other* characters *towards you*. This, in combination with the 'x' and 'space' hotkey, make the game feel like you're playing a single character.
+
+### Window Management
+- **LShift & F12** &ensp; - &ensp; **GetWizClientList**
+  - Sorts all windows depending on the order they are stacked on your desktop. Also refreshes the internal list of windows. Use this hotkey, if you have added or removed windows after starting the main script.
+- **F12** &ensp; - &ensp; **AssignWindows**
+  - Manually sort the window order. Similar to the SetupTeleport hotkey, press this hotkey on every character, in order you want them sorted. Press F12 (default) on your first character, again on your second and so on.
+- **1** &ensp; - &ensp; **FocusFirstWindow**
+  - Switch focus to your first character/window. The way your characters are ordered depends on (one of) the previous two hotkeys. The next three hotkeys do the same things for your other characters.
+- **2** &ensp; - &ensp; **FocusSecondWindow**
+- **3** &ensp; - &ensp; **FocusThirdWindow**
+- **4** &ensp; - &ensp; **FocusFourthWindow**
+
+### Autonomous Dancers
+- **F4** &ensp; - &ensp; **AutoPetDanceGame**
+  - Makes pets dance without requiring your input. Go to the Dance Game, select a world, then press this hotkey. Make pets work for themselves.
