@@ -22,7 +22,7 @@ All hotkeys are easily customizable via the ***config.ahk*** file.
   
 - If you don't want to tediously setup afk spinning on every character, just press F3 and all your characters will jump every now and then. Pressing F3 turns this timer off again.
 
-## Hotkeys: (Default Hotkey, Function)
+## Hotkeys: (Default Hotkey - Function)
 
 ### Script
 
