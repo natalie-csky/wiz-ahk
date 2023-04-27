@@ -2,7 +2,7 @@ WindowList := WinGetList("ahk_exe WizardGraphicalClient.exe")
 
 GetWizClientList(ThisHotkey)
 {
-    WindowList := WinGetList("ahk_exe WizardGraphicalClient.exe")
+    global WindowList := WinGetList("ahk_exe WizardGraphicalClient.exe")
     AmountClients := WindowList.Length
     if(not AmountClients)
     {
