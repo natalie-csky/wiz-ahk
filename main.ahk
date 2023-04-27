@@ -38,6 +38,7 @@ ToggleAntiIdleDisconnect(ThisHotkey)
 	}
 	Else
 	{
+		AntiIdleDisconnect()
 		MsgBox "Timer is on"
 		SetTimer AntiIdleDisconnect, IdleTimer ; Turn timer on
 		IsActive := True
