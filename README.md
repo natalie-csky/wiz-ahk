@@ -77,3 +77,9 @@ All hotkeys are easily customizable via the ***config.ahk*** file.
 ### Autonomous Dancers
 - **F4** &ensp; - &ensp; **AutoPetDanceGame**
   - Makes pets dance without requiring your input. Go to the Dance Game, select a world, then press this hotkey. Make pets work for themselves.
+
+## Configurations:
+- This script is made for a 1920 * 1080p resolution and the small UI size option (inside the game settings)
+  - Inside the config.ahk file is code to make the script work for regular UI size.
+    - Remove all the semicolons from the configurations block at the end of the file (except the title) and add semicolons to the block with the small UI size options.
+- If you want to make this script work for other resolutions or other sizes, kindly ask me to add them or add them yourself. AutoHotkey provides a 'Window Spy' with that you can see the x and y coordinates of your mouse cursor. With help of the Window Spy you can edit the config.ahk file to fit your resolution.
