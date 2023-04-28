@@ -1,8 +1,8 @@
 HotIfWinActive("ahk_exe WizardGraphicalClient.exe")
 
 ; SCRIPT
-Hotkey "F1",            CloseScriptMain
-Hotkey "F2",            ToggleSuspension
+Hotkey "F1",            CloseScriptMain, "S"
+Hotkey "F2",            ToggleSuspension, "S"
 
 ; ANTI IDLE DISCONNECT
 Hotkey "F3",            ToggleAntiIdleDisconnect

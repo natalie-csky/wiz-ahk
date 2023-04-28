@@ -46,7 +46,6 @@ ToggleAntiIdleDisconnect(ThisHotkey)
 }
 
 ; Toggle hotkey suspension, except for window switching and closing script
-#SuspendExempt
 ToggleSuspension(ThisHotkey)
 {
 	Suspend
