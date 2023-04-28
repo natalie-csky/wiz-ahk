@@ -1,7 +1,12 @@
 ; !!! This script is based on 1920 * 1080p resolution
 
-PlayC 		:= "{Click 1240 855}"
-CloseC		:= "{Click 1900 1055}"
+; TODO: Add UI-/ resolution-based Variables to config.ahk
+PlayC			:= "{Click 1240 855}"
+AboveContinueC	:= "{Click 1240 800}"
+ContinueC		:= "{Click 1240 855}"
+Snack1C			:= "{Click 670 730}"
+PlayAgainC		:= "{Click 950 850}"
+CloseC			:= "{Click 1900 1055}"
 
 ; ===
 
@@ -35,7 +40,11 @@ DownArrowYPixel 			:= 972
 ArrowIntervalTime 			:= 340
 AdditionalSleep 			:= 1000
 PressDelayTime 				:= 100
+ClickDelayTime				:= 200
 
+; TODO: Replace Temp variables with image recognition function that checks if game has ended or loading screen is over
+TempWaitEndGameTime 		:= 2000
+TempWaitEndLoadTime			:= 3000
 ; ===
 
 SendMode "Event"
@@ -130,29 +139,58 @@ CaptureAndPlay(AmountArrows)
 }
 
 ; Semi-automate pet dancing game
-AutoPetDanceGame(ThisHotkey)
+AutoPetDanceGame(ThisHotkey, IsRepeat := False)
 {
 	MouseGetPos(&MouseX, &MouseY)
 	WorldC := "{Click " . MouseX . " " . MouseY . "}"
-	Send WorldC
-	Send PlayC
 
-	SleepUntilArrowDisplayed()
-	CaptureAndPlay(3)
+	ih := InputHook(, "{Del}")
 
-	Sleep AdditionalSleep
-	SleepUntilArrowDisplayed()
-	CaptureAndPlay(4)
+	Loop
+	{
+		ih.Start()
+		Send WorldC
+		Send PlayC
 
-	Sleep AdditionalSleep
-	SleepUntilArrowDisplayed()
-	CaptureAndPlay(5)
+		SleepUntilArrowDisplayed()
+		CaptureAndPlay(3)
 
-	Sleep AdditionalSleep
-	SleepUntilArrowDisplayed()
-	CaptureAndPlay(6)
+		Sleep AdditionalSleep
+		SleepUntilArrowDisplayed()
+		CaptureAndPlay(4)
 
-	Sleep AdditionalSleep
-	SleepUntilArrowDisplayed()
-	CaptureAndPlay(7)
+		Sleep AdditionalSleep
+		SleepUntilArrowDisplayed()
+		CaptureAndPlay(5)
+
+		Sleep AdditionalSleep
+		SleepUntilArrowDisplayed()
+		CaptureAndPlay(6)
+
+		Sleep AdditionalSleep
+		SleepUntilArrowDisplayed()
+		CaptureAndPlay(7)
+
+		If(Not IsRepeat Or ih.EndReason == "EndKey")
+		{
+			Break
+		}
+
+		Sleep TempWaitEndGameTime
+		Send AboveContinueC
+		Send ContinueC
+		Sleep ClickDelayTime
+		Send Snack1C
+		Sleep ClickDelayTime
+		Send ContinueC
+		Sleep ClickDelayTime
+		Send PlayAgainC
+		Sleep TempWaitEndLoadTime
+		ih.Stop()
+	}
+}
+
+AutoPetDanceGameRepeat(ThisHotkey)
+{
+	AutoPetDanceGame(ThisHotkey, True)
 }

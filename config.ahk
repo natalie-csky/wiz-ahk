@@ -32,6 +32,7 @@ Hotkey "4",             FocusFourthWindow
 
 ; CHEATS
 Hotkey "F4",            AutoPetDanceGame
+Hotkey "LShift & F4",     AutoPetDanceGameRepeat
 
 ; === 1920*1080 resolution / SMALL UI size - Mouse click coordinates {Click X Y (ClickAmount)}
 
