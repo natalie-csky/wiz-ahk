@@ -132,6 +132,9 @@ CaptureAndPlay(AmountArrows)
 ; Semi-automate pet dancing game
 AutoPetDanceGame(ThisHotkey)
 {
+	MouseGetPos(&MouseX, &MouseY)
+	WorldC := "{Click " . MouseX . " " . MouseY . "}"
+	Send WorldC
 	Send PlayC
 
 	SleepUntilArrowDisplayed()
