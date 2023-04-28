@@ -50,8 +50,6 @@ TempWaitEndLoadTime			:= 3000
 SendMode "Event"
 SetDefaultMouseSpeed 2
 
-PetError := Error("Pet failed game or received age notification")
-
 HasFoundArrowIcon()
 {
 	Return PixelSearch(&PixelFoundC, &PixelFoundC, IconArrowXPixel, IconArrowYPixel, 
@@ -76,12 +74,13 @@ CheckPetGameError(i)
 {
 	if(i == 20)
 	{
-		Throw PetError()
+		Throw Error("Pet game timeout", -1)
 	}
 }
 
 GetArrowDirection()
 {
+	; TODO: Refactor 'while' loop to 'loop 20' loop and add error handling in case loop ends
 	i := 1
 	While(True)
 	{
@@ -194,12 +193,17 @@ AutoPetDanceGame(ThisHotkey, IsRepeat := False)
 			Sleep TempWaitEndLoadTime
 			ih.Stop()
 		}
-	}
-	Catch PetError
+	} 
+	Catch as e
 	{
-		Send CloseC
-		ih.Stop()
-		Exit
+		if(e.message == "Pet game timeout")
+		{
+			Send CloseC
+			ih.Stop()
+			Exit
+		}
+		else
+			throw e
 	}
 	
 }
