@@ -50,6 +50,8 @@ TempWaitEndLoadTime			:= 3000
 SendMode "Event"
 SetDefaultMouseSpeed 2
 
+PetError := Error("Pet failed game or received age notification")
+
 HasFoundArrowIcon()
 {
 	Return PixelSearch(&PixelFoundC, &PixelFoundC, IconArrowXPixel, IconArrowYPixel, 
@@ -70,18 +72,21 @@ HasFoundArrow(ArrowXPixel, ArrowYPixel)
 		ArrowXPixel, ArrowYPixel, ArrowPixelColor, ArrowPixelSearchVariation)
 }
 
+CheckPetGameError(i)
+{
+	if(i == 20)
+	{
+		Throw PetError()
+	}
+}
+
 GetArrowDirection()
 {
 	i := 1
 	While(True)
 	{
-		; if bot failed
-		if(i == 20)
-		{
-			Send CloseC
-			MsgBox "Your pet has failed. Train it harder."
-			Exit
-		}
+		CheckPetGameError(i)
+
 		If(HasFoundArrow(RightArrowXPixel, RightArrowYPixel))
 		{
 			Return "Right"
@@ -134,7 +139,7 @@ CaptureAndPlay(AmountArrows)
 		If (Direction == "Down")
 		{
 			Send "{Down}"
-		}	
+		}
 	}
 }
 
@@ -145,49 +150,58 @@ AutoPetDanceGame(ThisHotkey, IsRepeat := False)
 	WorldC := "{Click " . MouseX . " " . MouseY . "}"
 
 	ih := InputHook(, "{Del}")
-
-	Loop
+	try
 	{
-		ih.Start()
-		Send WorldC
-		Send PlayC
-
-		SleepUntilArrowDisplayed()
-		CaptureAndPlay(3)
-
-		Sleep AdditionalSleep
-		SleepUntilArrowDisplayed()
-		CaptureAndPlay(4)
-
-		Sleep AdditionalSleep
-		SleepUntilArrowDisplayed()
-		CaptureAndPlay(5)
-
-		Sleep AdditionalSleep
-		SleepUntilArrowDisplayed()
-		CaptureAndPlay(6)
-
-		Sleep AdditionalSleep
-		SleepUntilArrowDisplayed()
-		CaptureAndPlay(7)
-
-		If(Not IsRepeat Or ih.EndReason == "EndKey")
+		Loop
 		{
-			Break
+			ih.Start()
+			Send WorldC
+			Send PlayC
+	
+			SleepUntilArrowDisplayed()
+			CaptureAndPlay(3)
+	
+			Sleep AdditionalSleep
+			SleepUntilArrowDisplayed()
+			CaptureAndPlay(4)
+	
+			Sleep AdditionalSleep
+			SleepUntilArrowDisplayed()
+			CaptureAndPlay(5)
+	
+			Sleep AdditionalSleep
+			SleepUntilArrowDisplayed()
+			CaptureAndPlay(6)
+	
+			Sleep AdditionalSleep
+			SleepUntilArrowDisplayed()
+			CaptureAndPlay(7)
+	
+			If(Not IsRepeat Or ih.EndReason == "EndKey")
+			{
+				Break
+			}
+	
+			Sleep TempWaitEndGameTime
+			Send AboveContinueC
+			Send ContinueC
+			Sleep ClickDelayTime
+			Send Snack1C
+			Sleep ClickDelayTime
+			Send ContinueC
+			Sleep ClickDelayTime
+			Send PlayAgainC
+			Sleep TempWaitEndLoadTime
+			ih.Stop()
 		}
-
-		Sleep TempWaitEndGameTime
-		Send AboveContinueC
-		Send ContinueC
-		Sleep ClickDelayTime
-		Send Snack1C
-		Sleep ClickDelayTime
-		Send ContinueC
-		Sleep ClickDelayTime
-		Send PlayAgainC
-		Sleep TempWaitEndLoadTime
-		ih.Stop()
 	}
+	Catch PetError
+	{
+		Send CloseC
+		ih.Stop()
+		Exit
+	}
+	
 }
 
 AutoPetDanceGameRepeat(ThisHotkey)
