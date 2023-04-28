@@ -80,7 +80,7 @@ GetArrowDirection()
 		{
 			Send CloseC
 			MsgBox "Your pet has failed. Train it harder."
-			ExitApp
+			Exit
 		}
 		If(HasFoundArrow(RightArrowXPixel, RightArrowYPixel))
 		{
