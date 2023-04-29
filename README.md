@@ -64,7 +64,7 @@ All hotkeys are easily customizable via the ***config.ahk*** file.
   - A lifesaver. The most useful hotkey imo. If you have setup this hotkey correctly (see SetupTeleport above), pressing Tab teleports all *other* characters *towards you*. This, in combination with the 'x' and 'space' hotkey, make the game feel like you're playing a single character.
 
 ### Window Management
-- **LShift & F12** &ensp; - &ensp; **GetWizClientList**
+- **LShift + F12** &ensp; - &ensp; **GetWizClientList**
   - Sorts all windows depending on the order they are stacked on your desktop. Also refreshes the internal list of windows. Use this hotkey, if you have added or removed windows after starting the main script.
 - **F12** &ensp; - &ensp; **AssignWindows**
   - Manually sort the window order. Similar to the SetupTeleport hotkey, press this hotkey on every character, in order you want them sorted. Press F12 (default) on your first character, again on your second and so on.
@@ -77,6 +77,8 @@ All hotkeys are easily customizable via the ***config.ahk*** file.
 ### Autonomous Dancers
 - **F4** &ensp; - &ensp; **AutoPetDanceGame**
   - Makes pets dance without requiring your input. Go to the Dance Game, select a world, then press this hotkey. Make pets work for themselves.
+- **Shift + F4** &ensp; - &ensp; **AutoPetDanceGameRepeat**
+  - The same as F4, only that this hotkey repeats the whole process automatically. Once the game is won, it selects the first snack in your inventory and then starts a new game of the same world. This loop can be stopped by pressing **Del** while the pet game is running. 
 
 ## Configurations:
 - This script is made for a 1920 * 1080p resolution and the small UI size option (inside the game settings)
