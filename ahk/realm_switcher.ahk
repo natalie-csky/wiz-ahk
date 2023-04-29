@@ -1,5 +1,5 @@
 #Include window_helper.ahk
-#Include ../config.ahk
+#Include config.ahk
 
 ; End me, please :)
 RealmChecked := [	[{IsChecked: False}],
@@ -40,13 +40,15 @@ SwitchRealms(ThisHotkey)
 				; If that realm has not been visited yet
 				If !Realm.IsChecked
 				{
+					ArrowRight7C := SubStr(RealmsUIC.ArrorRightC, 1, -1) . " 7}"
+					;ArrowRight7C := RealmsUIC.ArrorRightC . " 7"
 					; Go to the last page
-					Send "{Esc}" RealmsC ArrorRight7C
-
+					Send "{Esc}" RealmsUIC.RealmsC ArrowRight7C
+					
 					; If the last page has not been visited yet, just click on the first item (there are no more items)
 					If OuterA_Index == 1
 					{
-						Send Realm1C
+						Send RealmsUIC.Realm1C
 						RealmChecked[1][1].IsChecked := True
 					}
 
@@ -55,14 +57,14 @@ SwitchRealms(ThisHotkey)
 					{
 						Loop OuterA_Index - 1
 						{
-							Send ArrorLeftC
+							Send RealmsUIC.ArrorLeftC
 						}
 						; Click on the next free realm
-						Send Realm%InnerA_Index%C
+						Send RealmsUIC.Realm%InnerA_Index%C
 						RealmChecked[OuterA_Index][InnerA_Index].IsChecked := True
 					}
 					; Switch Realm
-					Send GoToRealmC
+					Send RealmsUIC.GoToRealmC
 					Break OuterLoop
 				}
 			}

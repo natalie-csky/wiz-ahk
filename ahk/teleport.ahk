@@ -1,5 +1,5 @@
 #Include window_helper.ahk
-#Include ../config.ahk
+#Include config.ahk
 
 FriendOrder := Array()
 ; Assign character of active window into next position of group
@@ -42,8 +42,8 @@ Teleport(ThisHotkey)
 			SendMode "Event"
 			SetDefaultMouseSpeed 2
 			WinActivate "ahk_id " FriendOrder[A_Index]
-			send FriendListC
-			send Friend%MyPosition%C
+			send FriendUIC.FriendListC
+			send FriendUIC.Friend%MyPosition%C
 		}
 	}
 	WinActivate "ahk_id " MyID

@@ -1,9 +1,9 @@
-#include config.ahk
-#include sub/dance.ahk
-#include sub/misc.ahk
-#include sub/realm_switcher.ahk
-#include sub/teleport.ahk
-#include sub/window_management.ahk
+#include ahk/config.ahk
+#include ahk/dance.ahk
+#include ahk/misc.ahk
+#include ahk/realm_switcher.ahk
+#include ahk/teleport.ahk
+#include ahk/window_management.ahk
 
 ; Every 10 minutes, check if Wizard101 client is still running
 ; If not, close this script

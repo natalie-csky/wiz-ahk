@@ -1,41 +1,6 @@
-; !!! This script is based on 1920 * 1080p resolution
+; EndGamePixelSearchVariation := 40
 
-; TODO: Add UI-/ resolution-based Variables to config.ahk
-PlayC			:= "{Click 1240 855}"
-AboveContinueC	:= "{Click 1240 800}"
-ContinueC		:= "{Click 1240 855}"
-Snack1C			:= "{Click 670 730}"
-PlayAgainC		:= "{Click 950 850}"
-CloseC			:= "{Click 1900 1055}"
-
-; ===
-
-IconPixelSearchVariation	:= 40
-
-IconArrowPixelColor 		:= 0x927821
-
-IconArrowXPixel 			:= 924
-IconArrowYPixel 			:= 997
-
-; ===
-
-ArrowPixelSearchVariation 	:= 40
-
-ArrowPixelColor 			:= 0x071D00
-
-RightArrowXPixel 			:= 937
-RightArrowYPixel 			:= 983
-
-UpArrowXPixel 				:= 970
-UpArrowYPixel 				:= 1020
-
-LeftArrowXPixel 			:= 980
-LeftArrowYPixel 			:= 986
-
-DownArrowXPixel 			:= 954
-DownArrowYPixel 			:= 972
-
-; ===
+; EndGamePixelColor			:= 0xFFFF00
 
 ArrowIntervalTime 			:= 340
 AdditionalSleep 			:= 1000
@@ -54,8 +19,8 @@ SetDefaultMouseSpeed 2
 
 HasFoundArrowIcon()
 {
-	Return PixelSearch(&PixelFoundC, &PixelFoundC, IconArrowXPixel, IconArrowYPixel, 
-		IconArrowXPixel, IconArrowYPixel, IconArrowPixelColor, IconPixelSearchVariation)
+	Return PixelSearch(&PixelFoundC, &PixelFoundC, IconArrowArgs.PixelXCoord, IconArrowArgs.PixelYCoord, 
+		IconArrowArgs.PixelXCoord, IconArrowArgs.PixelYCoord, IconArrowArgs.PixelColor, IconArrowArgs.Variation)
 }
 
 SleepUntilArrowDisplayed()
@@ -69,29 +34,29 @@ SleepUntilArrowDisplayed()
 HasFoundArrow(ArrowXPixel, ArrowYPixel)
 {
 	Return PixelSearch(&PixelFoundC, &PixelFoundC, ArrowXPixel, ArrowYPixel, 
-		ArrowXPixel, ArrowYPixel, ArrowPixelColor, ArrowPixelSearchVariation)
+		ArrowXPixel, ArrowYPixel, ArrowPixelSearchArgsInstance.PixelColor, ArrowPixelSearchArgsInstance.Variation)
 }
 
 GetArrowDirection()
 {
 	Loop LoopTimeoutLimit
 	{
-		If(HasFoundArrow(RightArrowXPixel, RightArrowYPixel))
+		If(HasFoundArrow(ArrowPixelSearchArgsInstance.RightXCoord, ArrowPixelSearchArgsInstance.RightYCoord))
 		{
 			Return "Right"
 		}
 
-		If(HasFoundArrow(UpArrowXPixel, UpArrowYPixel))
+		If(HasFoundArrow(ArrowPixelSearchArgsInstance.UpXCoord, ArrowPixelSearchArgsInstance.UpYCoord))
 		{
 			Return "Up"
 		}
 
-		If(HasFoundArrow(LeftArrowXPixel, LeftArrowYPixel))
+		If(HasFoundArrow(ArrowPixelSearchArgsInstance.LeftXCoord, ArrowPixelSearchArgsInstance.LeftYCoord))
 		{
 			Return "Left"
 		}
 
-		If(HasFoundArrow(DownArrowXPixel, DownArrowYPixel))
+		If(HasFoundArrow(ArrowPixelSearchArgsInstance.DownXCoord, ArrowPixelSearchArgsInstance.DownYCoord))
 		{
 			Return "Down"
 		}
@@ -131,8 +96,15 @@ CaptureAndPlay(AmountArrows)
 	}
 }
 
+; Image thingamajig I think lol
+; ChechGameEnded()
+; {
+; 	Return PixelSearch(&PixelFoundC, &PixelFoundC, ArrowXPixel, ArrowYPixel, 
+; 		ArrowXPixel, ArrowYPixel, ArrowPixelColor, ArrowPixelSearchVariation)
+; }
+
 ; Semi-automate pet dancing game
-AutoPetDanceGame(ThisHotkey, IsRepeat := False)
+AutoPetDanceGame(ThisHotkey, IsRepeating := False)
 {
 	MouseGetPos(&MouseX, &MouseY)
 	WorldC := "{Click " . MouseX . " " . MouseY . "}"
@@ -140,9 +112,10 @@ AutoPetDanceGame(ThisHotkey, IsRepeat := False)
 	ih := InputHook(, "{Del}")
 	Loop
 	{
-		ih.Start()
+		if(IsRepeating)
+			ih.Start()
 		Send WorldC
-		Send PlayC
+		Send PetGameUIC.PlayC
 
 		try
 		{
@@ -169,7 +142,7 @@ AutoPetDanceGame(ThisHotkey, IsRepeat := False)
 		{
 			if(e.message == "Pet game timeout")
 			{
-				Send CloseC
+				Send PetGameUIC.CloseC
 				ih.Stop()
 				Exit
 			}
@@ -177,20 +150,20 @@ AutoPetDanceGame(ThisHotkey, IsRepeat := False)
 				throw e
 		}
 
-		If(Not IsRepeat Or ih.EndReason == "EndKey")
+		If(Not IsRepeating Or ih.EndReason == "EndKey")
 		{
 			Break
 		}
 
 		Sleep TempWaitEndGameTime
-		Send AboveContinueC
-		Send ContinueC
+		Send PetGameUIC.AboveContinueC
+		Send PetGameUIC.ContinueC
 		Sleep ClickDelayTime
-		Send Snack1C
+		Send PetGameUIC.Snack1C
 		Sleep ClickDelayTime
-		Send ContinueC
+		Send PetGameUIC.ContinueC
 		Sleep ClickDelayTime
-		Send PlayAgainC
+		Send PetGameUIC.PlayAgainC
 		Sleep TempWaitEndLoadTime
 		ih.Stop()
 	}
