@@ -82,4 +82,4 @@ All hotkeys are easily customizable via the **config.ini** file.
 
 ## Configurations:
 - This script is made for a 1920 * 1080p resolution and the small UI size option (inside the game settings)
-- If you would like this script to support to other resolutions or sizes, kindly ask me to add them.
+- If you would like this script to support to other resolutions or sizes, kindly ask me to add them or add/edit them yourself in the config.ini file if you know what you're doing.
