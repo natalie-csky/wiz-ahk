@@ -82,6 +82,4 @@ All hotkeys are easily customizable via the **config.ini** file.
 
 ## Configurations:
 - This script is made for a 1920 * 1080p resolution and the small UI size option (inside the game settings)
-  - Inside the config.ahk file is code to make the script work for regular UI size.
-    - Remove all the semicolons from the configurations block at the end of the file (except the title) and add semicolons to the block with the small UI size options.
-- If you want to make this script work for other resolutions or other sizes, kindly ask me to add them or add them yourself. AutoHotkey provides a 'Window Spy' with that you can see the x and y coordinates of your mouse cursor. With help of the Window Spy you can edit the config.ahk file to fit your resolution.
+- If you would like this script to support to other resolutions or sizes, kindly ask me to add them.
