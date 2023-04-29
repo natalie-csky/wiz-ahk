@@ -42,6 +42,8 @@ AdditionalSleep 			:= 1000
 PressDelayTime 				:= 100
 ClickDelayTime				:= 200
 
+LoopTimeoutLimit			:= 20
+
 ; TODO: Replace Temp variables with image recognition function that checks if game has ended or loading screen is over
 TempWaitEndGameTime 		:= 2000
 TempWaitEndLoadTime			:= 3000
@@ -70,22 +72,10 @@ HasFoundArrow(ArrowXPixel, ArrowYPixel)
 		ArrowXPixel, ArrowYPixel, ArrowPixelColor, ArrowPixelSearchVariation)
 }
 
-CheckPetGameError(i)
-{
-	if(i == 20)
-	{
-		Throw Error("Pet game timeout", -1)
-	}
-}
-
 GetArrowDirection()
 {
-	; TODO: Refactor 'while' loop to 'loop 20' loop and add error handling in case loop ends
-	i := 1
-	While(True)
+	Loop LoopTimeoutLimit
 	{
-		CheckPetGameError(i)
-
 		If(HasFoundArrow(RightArrowXPixel, RightArrowYPixel))
 		{
 			Return "Right"
@@ -105,9 +95,8 @@ GetArrowDirection()
 		{
 			Return "Down"
 		}
-		i += 1
 	}
-	
+	Throw Error("Pet game timeout", -1)
 }
 
 CaptureAndPlay(AmountArrows)
@@ -149,62 +138,63 @@ AutoPetDanceGame(ThisHotkey, IsRepeat := False)
 	WorldC := "{Click " . MouseX . " " . MouseY . "}"
 
 	ih := InputHook(, "{Del}")
-	try
+	Loop
 	{
-		Loop
+		ih.Start()
+		Send WorldC
+		Send PlayC
+
+		try
 		{
-			ih.Start()
-			Send WorldC
-			Send PlayC
-	
 			SleepUntilArrowDisplayed()
 			CaptureAndPlay(3)
-	
+
 			Sleep AdditionalSleep
 			SleepUntilArrowDisplayed()
 			CaptureAndPlay(4)
-	
+
 			Sleep AdditionalSleep
 			SleepUntilArrowDisplayed()
 			CaptureAndPlay(5)
-	
+
 			Sleep AdditionalSleep
 			SleepUntilArrowDisplayed()
 			CaptureAndPlay(6)
-	
+
 			Sleep AdditionalSleep
 			SleepUntilArrowDisplayed()
 			CaptureAndPlay(7)
-	
-			If(Not IsRepeat Or ih.EndReason == "EndKey")
-			{
-				Break
-			}
-	
-			Sleep TempWaitEndGameTime
-			Send AboveContinueC
-			Send ContinueC
-			Sleep ClickDelayTime
-			Send Snack1C
-			Sleep ClickDelayTime
-			Send ContinueC
-			Sleep ClickDelayTime
-			Send PlayAgainC
-			Sleep TempWaitEndLoadTime
-			ih.Stop()
 		}
-	} 
-	Catch as e
-	{
-		if(e.message == "Pet game timeout")
+		Catch as e
 		{
-			Send CloseC
-			ih.Stop()
-			Exit
+			if(e.message == "Pet game timeout")
+			{
+				Send CloseC
+				ih.Stop()
+				Exit
+			}
+			else
+				throw e
 		}
-		else
-			throw e
+
+		If(Not IsRepeat Or ih.EndReason == "EndKey")
+		{
+			Break
+		}
+
+		Sleep TempWaitEndGameTime
+		Send AboveContinueC
+		Send ContinueC
+		Sleep ClickDelayTime
+		Send Snack1C
+		Sleep ClickDelayTime
+		Send ContinueC
+		Sleep ClickDelayTime
+		Send PlayAgainC
+		Sleep TempWaitEndLoadTime
+		ih.Stop()
 	}
+	
 	
 }
 
