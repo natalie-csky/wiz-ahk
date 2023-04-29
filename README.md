@@ -1,7 +1,7 @@
 # Wizard101 Multi-boxing Tools + More
 
 This AutoHotKey script mainly helps you with multi-boxing in Wizard101 but also provides some other tools.  
-All hotkeys are easily customizable via the ***config.ahk*** file.
+All hotkeys are easily customizable via the **config.ini** file.
 
 ## Quickstart Guide:
 
